@@ -81,15 +81,15 @@
 - [ ] 增加一个跨模态的记忆相册，增加Pro版本和拍摄仪版本之间的联动。
 - [ ] 调整故事，减少东亚卷王属性，着重描写家庭
 
-## TODO List
+</details>
+
+ ## TODO List
 
 - [x] 转移演讲稿到readme
-- [ ] 建立新的两个比赛的TODO proposal
+- [x] 建立新的两个比赛的TODO proposal
 - [ ] 补充插入B站视频
 - [ ] 补充Pro版本的多模态互动的文本
 - [ ] 做一个目录
- 
- </details>
 
 ---
 
