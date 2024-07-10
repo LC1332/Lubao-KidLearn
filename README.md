@@ -45,6 +45,54 @@
 
 我们会在8月底之后公开这批完全由AI生成的数据
 
+### 更深入的科普数据生成
+
+这两天我们又实践了一个新的prompt，可以在之前基础上进一步生成出更深入的科普问题
+
+输入是
+
+```
+对Too Simple QA中的question和answer进行改进，提出一个更深入的儿童科普问题，并进行解答。
+
+# Too Simple QA
+
+simple_question: 三文鱼是什么鱼？
+simple_answer: 三文鱼是一种身体橙红色的鱼，它游得很快，而且会洄游到出生地产卵。三文鱼很健康，含有丰富的营养哦！
+
+Let's think it step by step，以json形式输出逐个字段。包含以下字段
+- related_reference: 搜索或者写出一些和simple_question相关的资料
+- echo_1: "我将思考5个和simple_question相关的问题"
+- 5_related_questions: 5个和simple_question相关的问题
+- find_the_best_reason: 分析5个问题，哪一个适合问题适合作为对simple_question的进一步深入
+- best_deeper_question: 给出最合适的那个问题
+- echo_2: "已经找到合适的深入问题，正在生成科普问答"
+- final_question: 生成的问题
+- final_answer: 生成的问题的答案
+```
+
+ChatGLM的输出是
+
+```json
+{
+  "related_reference": "三文鱼属于鲑科鱼类，生命周期独特，它们在淡水河溪中出生，然后游到大海中成长，成年后又会洄游到出生地繁殖。三文鱼含有高量的Omega-3脂肪酸，对人类健康非常有益。",
+  "echo_1": "我将思考5个和simple_question相关的问题",
+  "5_related_questions": [
+    "三文鱼为什么能洄游到出生地产卵？",
+    "三文鱼为什么是橙红色的？",
+    "三文鱼体内的Omega-3脂肪酸有什么作用？",
+    "三文鱼在大海和淡水中的生活有什么不同？",
+    "为什么三文鱼被认为是一种健康的食物？"
+  ],
+  "find_the_best_reason": "考虑到三文鱼洄游的特性非常独特且对其生命周期至关重要，这可能是最有趣且教育意义的问题。",
+  "best_deeper_question": "三文鱼为什么能洄游到出生地产卵？",
+  "echo_2": "已经找到合适的深入问题，正在生成科普问答",
+  "final_question": "三文鱼如何记得它出生地的河流并成功洄游回去？",
+  "final_answer": "三文鱼能够洄游到出生地产卵是因为它们拥有一种非常特别的本能。它们可以通过地球的磁场、太阳的位置、水的气味以及河流的地理特征来辨别方向。这种能力是与生俱来的，帮助它们在成熟后返回到它们出生的河流。这个过程对三文鱼种群的生存至关重要，因为它保证了它们能在最适合孵化幼鱼的淡水环境中繁殖。"
+}
+```
+
+我们正在用这个方法批量获取更多的科普数据
+
 </details>
 
 ## Outline
